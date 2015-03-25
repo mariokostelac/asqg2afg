@@ -45,7 +45,8 @@ namespace AMOS {
       a_hang = -b_not_matching;
       b_hang = -a_not_matching;
     } else {
-      assert(false);
+      fprintf(stderr, "%d %d %d, %d %d %d %c\n", start1, end1, len1, start2, end2, len2, adjacency);
+      //assert(false);
     }
   }
 

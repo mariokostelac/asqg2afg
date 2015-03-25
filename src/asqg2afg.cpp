@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "reader.h"
+#include "asqg/reader.h"
 
 using AMOS::Overlap;
 using std::cin;

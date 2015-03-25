@@ -1,7 +1,7 @@
 #ifndef _ASQG_READER_H
 #define _ASQG_READER_H
 
-#include "overlap.h"
+#include "../amos/overlap.h"
 
 #include <cstdio>
 #include <iostream>
