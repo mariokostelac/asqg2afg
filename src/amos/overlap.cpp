@@ -14,13 +14,13 @@ namespace AMOS {
   //
   // read a           -ahang     ---------------|--------------->
   // read b      -------------------|-------------->     -bhang
-  Overlap::Overlap(const uint32_t r1, const uint32_t r2, bool second_flipped,
+  Overlap::Overlap(const uint32_t r1, const uint32_t r2, bool second_complement,
       const int32_t start1, const int32_t end1, const int32_t len1,
       const int32_t start2, const int32_t end2, const int32_t len2,
       const int32_t scr)
     :read1(r1), read2(r2), score(scr)
   {
-    adjacency = second_flipped ? 'I' : 'N';
+    adjacency = second_complement ? 'I' : 'N';
 
     int overlap_len_a = end1 - start1;
     int overlap_len_b = end2 - start2;
@@ -46,7 +46,7 @@ namespace AMOS {
       b_hang = -a_not_matching;
     } else {
       fprintf(stderr, "%d %d %d, %d %d %d %c\n", start1, end1, len1, start2, end2, len2, adjacency);
-      //assert(false);
+      assert(false);
     }
   }
 

@@ -27,7 +27,7 @@ namespace AMOS {
       // read b      -------------------|-------------->     -bhang
       Overlap(const uint32_t r1, const uint32_t r2, const char adj, const int32_t ahg, const int32_t bhg, const int32_t scr);
 
-      Overlap(const uint32_t r1, const uint32_t r2, bool second_flipped,
+      Overlap(const uint32_t r1, const uint32_t r2, bool second_complement,
           const int32_t start1, const int32_t end1, const int32_t len1,
           const int32_t start2, const int32_t end2, const int32_t len2,
           const int32_t scr);

@@ -4,13 +4,12 @@
 #include <cstring>
 #include <iostream>
 #include <string>
-#include <map>
+#include <sstream>
 
 #define BUFF_SIZE 4096
 
-using AMOS::Overlap;
 using std::string;
-using std::map;
+using std::stringstream;
 using std::cerr;
 using std::cout;
 
@@ -22,10 +21,9 @@ namespace ASQG {
     int buff_size = BUFF_SIZE/2;
     char *line = new char[buff_size];
 
-    map<string, int> read_id;
-
     while (!in.eof()) {
       in.getline(line, buff_size);
+      if (in.eof()) break;
       while (in.fail()) {
         delete[] line;
         buff_size *= 2;
@@ -33,31 +31,56 @@ namespace ASQG {
         in.getline(line, buff_size);
       }
 
+      stringstream curr_line(line);
+
       string type;
-      in >> type;
+      curr_line >> type;
 
-      if (type == "VT") {
-        string read_name;
-        in >> read_name;
-        assert(!in.fail());
-
-        read_id[read_name] = read_id.size() + 1;
-      } else if (type == "ED") {
+      if (type == "ED") {
         string read1, read2;
         int start1, end1, len1;
         int start2, end2, len2, orientation2;
         int diff;
-        in >> read1 >> read2 >> start1 >> end1 >> len1 >> start2 >> end2 >> len2 >> orientation2 >> diff;
+        curr_line >> read1 >> read2 >> start1 >> end1 >> len1 >> start2 >> end2 >> len2 >> orientation2 >> diff;
         assert(!in.fail());
 
-        assert(read_id.count(read1) && read_id.count(read2));
-        int r1 = read_id[read1], r2 = read_id[read2];
+        container.push_back(new Overlap(read1, read2, start1, end1, len1,
+              start2, end2, len2, orientation2, diff));
 
-        // score approximation
-        int scr = (len1 + len2)/2 - diff;
+        ++records;
+      }
+    }
 
-        // +1 because ASQG end is inclusive, Overlap considers end as exclusive
-        container.push_back(new Overlap(r1, r2, orientation2, start1, end1 + 1, len1, start2, end2 + 1, len2, scr));
+    return records;
+  }
+
+  int get_reads(std::vector<Read*>& container, std::istream& in) {
+    int records = 0;
+
+    int buff_size = BUFF_SIZE/2;
+    char *line = new char[buff_size];
+
+    while (!in.eof()) {
+      in.getline(line, buff_size);
+      if (in.eof()) break;
+      while (in.fail()) {
+        delete[] line;
+        buff_size *= 2;
+        line = new char[buff_size];
+        in.getline(line, buff_size);
+      }
+
+      stringstream curr_line(line);
+
+      string type;
+      curr_line >> type;
+
+      if (type == "VT") {
+        string key, seq;
+        curr_line >> key >> seq;
+        assert(!in.fail());
+
+        container.push_back(new Read(key, seq));
 
         ++records;
       }

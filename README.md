@@ -15,5 +15,5 @@ make
 ## Usage
 
 ```
-bin/asqg2afg < graph.asqg > overlaps.afg
+bin/asqg2afg graph.asqg > overlaps.afg
 ```
