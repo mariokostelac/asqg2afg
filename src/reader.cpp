@@ -52,8 +52,12 @@ namespace ASQG {
 
         assert(read_id.count(read1) && read_id.count(read2));
         int r1 = read_id[read1], r2 = read_id[read2];
+
+        // score approximation
         int scr = (len1 + len2)/2 - diff;
-        container.push_back(new Overlap(r1, r2, orientation2, start1, end1+1, len1, start2, end2+1, len2, scr));
+
+        // +1 because ASQG end is inclusive, Overlap considers end as exclusive
+        container.push_back(new Overlap(r1, r2, orientation2, start1, end1 + 1, len1, start2, end2 + 1, len2, scr));
 
         ++records;
       }
