@@ -64,8 +64,9 @@ int main(int argc, char **argv) {
     int len2 = curr_overlap->len2;
 
     if (curr_overlap->second_reversed) {
-      start2 += len2 - end2;
-      end2 = len2;
+      start2 = len2 - start2;
+      end2 = len2 - end2;
+      std::swap(start2, end2);
     }
 
     AMOS::Overlap converted(r1, r2, curr_overlap->second_reversed, start1, end1, len1, start2, end2, len2, 0);
