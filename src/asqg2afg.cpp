@@ -42,10 +42,12 @@ int main(int argc, char **argv) {
   file.close();
 
   // assign read ids (starting from 1)
+  int last_read_id = 0;
   map<string, int> read_id;
   for (int i = 0; i < reads.size(); ++i) {
     const auto& curr_read = reads[i];
-    read_id[curr_read->key] = read_id.size() + 1;
+    read_id[curr_read->key] = ++last_read_id;
+    cerr << curr_read->key << " " << read_id[curr_read->key] << endl;
   }
 
   // convert ASQG overlaps to AMOS overlaps
