@@ -48,7 +48,6 @@ int main(int argc, char **argv) {
   for (int i = 0; i < reads.size(); ++i) {
     const auto& curr_read = reads[i];
     read_id[curr_read->key] = ++last_read_id;
-    cerr << curr_read->key << " " << read_id[curr_read->key] << endl;
   }
 
   // convert ASQG overlaps to AMOS overlaps
