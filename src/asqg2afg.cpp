@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <cassert>
+#include <cstdlib>
 #include "amos/overlap.h"
 #include "asqg/reader.h"
 
