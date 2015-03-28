@@ -52,8 +52,8 @@ namespace AMOS {
 
   ostream& operator << (ostream &o, const AMOS::Overlap& overlap) {
     o << "{OVL" << endl;
-    o << "rds:" << overlap.read1 << "," << overlap.read2 << endl;
     o << "adj:" << overlap.adjacency << endl;
+    o << "rds:" << overlap.read1 << "," << overlap.read2 << endl;
     o << "ahg:" << overlap.a_hang << endl;
     o << "bhg:" << overlap.b_hang << endl;
     o << "scr:" << overlap.score << endl;
